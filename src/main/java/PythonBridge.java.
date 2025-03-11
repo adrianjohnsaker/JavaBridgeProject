@@ -1,0 +1,18 @@
+src/main/java/PythonBridge.java
+import java.io.*;
+import java.util.*;
+
+public class PythonBridge {
+    private String pythonExecutablePath;
+ Public code references from 4 repositories
+Scroll down and click "Commit new file".
+Create the Gradle Build File:
+Click on "Add file" and select "Create new file".
+Name the file build.gradle.
+Paste the following content into the file:
+￼
+build.gradle
+v5
+plugins {
+    id 'java'
+}
