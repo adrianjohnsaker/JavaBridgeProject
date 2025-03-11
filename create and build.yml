@@ -1,0 +1,11 @@
+name: Build and Package Java Project
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/
