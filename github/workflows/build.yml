@@ -1,4 +1,4 @@
-```yaml name=.github/workflows/build.yml
+yaml name=.github/workflows/build.yml
     name: Java CI with Gradle
 
     on:
@@ -22,4 +22,4 @@
           with:
             name: java-application
             path: build/libs/*.jar
-    ```
+
