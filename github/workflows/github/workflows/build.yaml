@@ -1,33 +1,25 @@
-name: Build JAR File
+name: Build and Package Java Project
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v2
+      with:
+        java-version: '1.8'
 
-      - name: Build JAR
-        run: |
-          mkdir -p target
-          javac -d target src/com/amigadeia/PythonBridge.java
-          jar cf PythonBridge.jar -C target .
+    - name: Build with Maven
+      run: mvn clean package
 
-      - name: Upload JAR
-        uses: actions/upload-artifact@v3
-        with:
-          name: PythonBridge.jar
-          path: PythonBridge.jar
+    - name: Upload JAR Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: javabridgeproject
+        path: target/*.jar
