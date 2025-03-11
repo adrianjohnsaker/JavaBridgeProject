@@ -1,0 +1,33 @@
+name: Build JAR File
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build JAR
+        run: |
+          mkdir -p target
+          javac -d target src/com/amigadeia/PythonBridge.java
+          jar cf PythonBridge.jar -C target .
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v3
+        with:
+          name: PythonBridge.jar
+          path: PythonBridge.jar
