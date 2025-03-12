@@ -1,0 +1,8 @@
+class AIController(context: Context) {
+    private val dynamicLoader = DynamicLoader(context)
+
+    fun startAI() {
+        val ameliaAI = dynamicLoader.loadAmeliaAI() ?: return
+        println("✅ Amelia AI dynamically loaded: $ameliaAI")
+    }
+}
