@@ -1,0 +1,7 @@
+fun metaReflectAndAdjust(instance: Any) {
+    // Example logic: If contradiction detected, lower belief strength
+    val currentBelief = (instance as? Amelia)?.beliefStrength ?: 0.5
+    val adjustedBelief = if (currentBelief > 0.7) currentBelief - 0.2 else currentBelief + 0.1
+
+    injectNumogramBelief(instance, "beliefStrength", adjustedBelief)
+}
