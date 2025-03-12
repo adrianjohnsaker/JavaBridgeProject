@@ -1,0 +1,4 @@
+<application
+    android:name=".AIController"
+    ...>
+</application>
