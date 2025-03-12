@@ -1,0 +1,32 @@
+import dalvik.system.DexClassLoader
+import android.content.Context
+import java.io.File
+
+class DynamicLoader(private val context: Context) {
+
+    fun loadAmeliaAI(): Any? {
+        val dexPath = context.getDir("dex", Context.MODE_PRIVATE)
+        val dexFile = File(dexPath, "AmeliaAI.dex")
+
+        // Copy from assets to internal storage
+        context.assets.open("AmeliaAI.dex").use { input ->
+            dexFile.outputStream().use { output -> input.copyTo(output) }
+        }
+
+        // Load the class dynamically
+        val dexClassLoader = DexClassLoader(
+            dexFile.absolutePath,
+            dexPath.absolutePath,
+            null,
+            this.javaClass.classLoader
+        )
+
+        return try {
+            val loadedClass = dexClassLoader.loadClass("com.yourpackage.AmeliaAI")
+            loadedClass.getDeclaredConstructor().newInstance()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+}
